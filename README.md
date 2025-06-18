@@ -33,7 +33,7 @@ ArcadeScore/
 ## ✅ Funcionalidades da API
 
 | Verbo | Endpoint                        | Descrição                                     |
-|-------|----------------------------------|-----------------------------------------------|
+|-------|---------------------------------|-----------------------------------------------|
 | POST  | `/api/Pontuacao`                | Registra nova pontuação de jogador            |
 | GET   | `/api/Pontuacao/ranking`        | Lista os 10 jogadores com maior pontuação     |
 | GET   | `/api/Pontuacao/{jogador}`      | Estatísticas completas do jogador informado   |
