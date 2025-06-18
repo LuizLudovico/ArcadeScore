@@ -55,12 +55,14 @@ ArcadeScore/
 
 4. **Acesse o Swagger:**
    ```
-   https://http://localhost:5089/swagger/index.html
+   https://localhost:{PORT}/swagger
    ```
 
 ---
 
-## 🧪 Exemplo de Requisição POST
+## 🧪 Exemplos de Requisições
+
+### 📌 POST `/api/Pontuacao` — Registrar nova pontuação
 
 ```http
 POST /api/Pontuacao
@@ -71,6 +73,76 @@ Content-Type: application/json
   "pontos": 1500,
   "dataPartida": "2025-06-18T15:30:00"
 }
+```
+
+### 📌 GET `/api/Pontuacao/ranking` — Top 10 jogadores com maior pontuação
+
+```http
+GET /api/Pontuacao/ranking
+```
+
+**Resposta esperada:**
+```json
+[
+  {
+    "id": "b3fd0b65-1c7e-47e2-810f-b2078372e927",
+    "jogador": "Luiz",
+    "pontos": 1500,
+    "dataPartida": "2025-06-18T15:30:00"
+  }
+]
+```
+
+### 📌 GET `/api/Pontuacao/{jogador}` — Estatísticas de um jogador
+
+```http
+GET /api/Pontuacao/Luiz
+```
+
+**Resposta esperada:**
+```json
+{
+  "jogador": "Luiz",
+  "partidasJogadas": 5,
+  "mediaPontuacao": 1320,
+  "maiorPontuacao": 1500,
+  "menorPontuacao": 1200,
+  "recordesBatidos": 2,
+  "tempoDeJogo": "10 dias"
+}
+```
+
+### 📌 PUT `/api/Pontuacao/{id}` — Atualizar uma pontuação existente
+
+```http
+PUT /api/Pontuacao/b3fd0b65-1c7e-47e2-810f-b2078372e927
+Content-Type: application/json
+
+{
+  "jogador": "Luiz",
+  "pontos": 1600,
+  "dataPartida": "2025-06-18T15:30:00"
+}
+```
+
+**Resposta esperada:**
+```json
+{
+  "jogador": "Luiz",
+  "pontos": 1600,
+  "dataPartida": "2025-06-18T15:30:00"
+}
+```
+
+### 📌 DELETE `/api/Pontuacao/{id}` — Remover uma pontuação
+
+```http
+DELETE /api/Pontuacao/b3fd0b65-1c7e-47e2-810f-b2078372e927
+```
+
+**Resposta esperada:**
+```
+204 No Content
 ```
 
 ---
