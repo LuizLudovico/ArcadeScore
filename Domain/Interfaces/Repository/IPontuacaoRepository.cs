@@ -6,6 +6,9 @@ namespace Arcade.Domain.Interfaces.Repository
     {
         void Adicionar(Pontuacao pontuacao);
         List<Pontuacao> ObterTop10();
-        List<Pontuacao> ObterPorJogador(string jogador);
+        List<Pontuacao> ObterPorJogador(string jogador);        
+        Pontuacao? ObterPorId(Guid id);
+        void Atualizar(Guid id, Pontuacao novaPontuacao);
+        void Remover(Guid id);
     }
 }

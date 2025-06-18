@@ -24,5 +24,30 @@ namespace Arcade.Service.Services
                 .OrderBy(p => p.DataPartida)
                 .ToList();
         }
+
+        public Pontuacao? ObterPorId(Guid id)
+        {
+            return _pontuacoes.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void Atualizar(Guid id, Pontuacao novaPontuacao)
+        {
+            var existente = _pontuacoes.FirstOrDefault(p => p.Id == id);
+            if (existente != null)
+            {
+                existente.Jogador = novaPontuacao.Jogador;
+                existente.Pontos = novaPontuacao.Pontos;
+                existente.DataPartida = novaPontuacao.DataPartida;
+            }
+        }
+
+        public void Remover(Guid id)
+        {
+            var existente = _pontuacoes.FirstOrDefault(p => p.Id == id);
+            if (existente != null)
+            {
+                _pontuacoes.Remove(existente);
+            }
+        }
     }
 }

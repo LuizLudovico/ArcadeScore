@@ -49,6 +49,28 @@ namespace Arcade.Application.Controllers
             return Ok(estatisticas);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult AtualizarPontuacao(Guid id, [FromBody] Pontuacao pontuacao)
+        {
+            var existe = _repository.ObterPorId(id);
+            if (existe == null)
+                return NotFound($"Pontuação com ID {id} não encontrada.");
+
+            _repository.Atualizar(id, pontuacao);
+            return Ok(pontuacao);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult RemoverPontuacao(Guid id)
+        {
+            var existe = _repository.ObterPorId(id);
+            if (existe == null)
+                return NotFound($"Pontuação com ID {id} não encontrada.");
+
+            _repository.Remover(id);
+            return NoContent();
+        }
+
         private int CalcularRecordes(List<Pontuacao> partidas)
         {
             int recordes = 0, max = 0;

@@ -32,11 +32,13 @@ ArcadeScore/
 
 ## ✅ Funcionalidades da API
 
-| Verbo | Endpoint                        | Descrição                                     |
-|-------|---------------------------------|-----------------------------------------------|
-| POST  | `/api/Pontuacao`                | Registra nova pontuação de jogador            |
-| GET   | `/api/Pontuacao/ranking`        | Lista os 10 jogadores com maior pontuação     |
-| GET   | `/api/Pontuacao/{jogador}`      | Estatísticas completas do jogador informado   |
+| Verbo  | Endpoint                        | Descrição                                     |
+|--------|----------------------------------|-----------------------------------------------|
+| POST   | `/api/Pontuacao`                | Registra nova pontuação de jogador            |
+| GET    | `/api/Pontuacao/ranking`        | Lista os 10 jogadores com maior pontuação     |
+| GET    | `/api/Pontuacao/{jogador}`      | Estatísticas completas do jogador informado   |
+| PUT    | `/api/Pontuacao/{id}`           | Atualiza os dados de uma pontuação existente  |
+| DELETE | `/api/Pontuacao/{id}`           | Remove uma pontuação existente                |
 
 ---
 
@@ -53,15 +55,17 @@ ArcadeScore/
 
 4. **Acesse o Swagger:**
    ```
-   https://localhost:xxxx/swagger
+   https://http://localhost:5089/swagger/index.html
    ```
 
 ---
 
 ## 🧪 Exemplo de Requisição POST
 
-```json
+```http
 POST /api/Pontuacao
+Content-Type: application/json
+
 {
   "jogador": "Luiz",
   "pontos": 1500,
