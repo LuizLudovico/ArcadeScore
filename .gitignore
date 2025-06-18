@@ -1,8 +1,61 @@
-﻿################################################################################
-# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
-################################################################################
+﻿###########################################################
+# Visual Studio + .NET completo
+###########################################################
 
-/.vs
-# Diretórios de build
+# Arquivos de build
 **/bin/
 **/obj/
+**/TestResults/
+**/out/
+
+# VS config
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos temporários
+*.tmp
+*.log
+*.cache
+*.pdb
+
+# Arquivos de publish locais
+**/publish/
+**/*.dbmdl
+**/*.jfm
+
+# Diretórios de pacote
+packages/
+*.nupkg
+*.snupkg
+*.nuspec
+
+# Arquivos de lock do NuGet
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Arquivos gerados pelo Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Arquivos de testes
+coverage/
+*.coverage
+*.coveragexml
+
+# Arquivos do Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Arquivos gerados por erros
+*.StackTrace.txt
+
+# Outros
+*.db
+*.bak
+*.old
+*.orig
