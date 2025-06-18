@@ -1,0 +1,16 @@
+C:\ArcadeScore\Service\bin\Debug\net6.0\Arcade.Service.deps.json
+C:\ArcadeScore\Service\bin\Debug\net6.0\Arcade.Service.dll
+C:\ArcadeScore\Service\bin\Debug\net6.0\Arcade.Service.pdb
+C:\ArcadeScore\Service\bin\Debug\net6.0\Arcade.Domain.dll
+C:\ArcadeScore\Service\bin\Debug\net6.0\Arcade.Domain.pdb
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.csproj.AssemblyReference.cache
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.AssemblyInfoInputs.cache
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.AssemblyInfo.cs
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.csproj.CoreCompileInputs.cache
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.sourcelink.json
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.S.31BD638B.Up2Date
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.dll
+C:\ArcadeScore\Service\obj\Debug\net6.0\refint\Arcade.Service.dll
+C:\ArcadeScore\Service\obj\Debug\net6.0\Arcade.Service.pdb
+C:\ArcadeScore\Service\obj\Debug\net6.0\ref\Arcade.Service.dll
