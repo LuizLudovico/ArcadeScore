@@ -11,9 +11,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Domain\Arcade.Domain.csproj" />
-		<ProjectReference Include="..\Service\Arcade.Service.csproj" />
-		<ProjectReference Include="..\CrossCutting\Arcade.CrossCutting.csproj" />
+		<ProjectReference Include="..\Arcade.Domain\Arcade.Domain.csproj" />
+		<ProjectReference Include="..\Arcade.Service\Arcade.Service.csproj" />
+		<ProjectReference Include="..\Arcade.CrossCutting\Arcade.CrossCutting.csproj" />
 	</ItemGroup>
 	
 </Project>

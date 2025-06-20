@@ -1,5 +1,4 @@
-﻿using Arcade.Domain.Entities;
-using Arcade.Domain.Interfaces.Repository;
+﻿using Arcade.Domain.Interfaces.Repository;
 
 namespace Arcade.Service.Services
 {

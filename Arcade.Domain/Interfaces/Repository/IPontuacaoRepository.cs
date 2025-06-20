@@ -1,6 +1,4 @@
-﻿using Arcade.Domain.Entities;
-
-namespace Arcade.Domain.Interfaces.Repository
+﻿namespace Arcade.Domain.Interfaces.Repository
 {
     public interface IPontuacaoRepository
     {
