@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Arcade.Domain.Interfaces.Repository;
+using Arcade.Service.Services;
+using Arcade.Domain.DTOs;
 
 namespace Arcade.Application.Controllers
 {
@@ -8,10 +10,12 @@ namespace Arcade.Application.Controllers
     public class PontuacaoController : ControllerBase
     {
         private readonly IPontuacaoRepository _repository;
+        private readonly EstatisticaService _estatisticaService;
 
-        public PontuacaoController(IPontuacaoRepository repository)
+        public PontuacaoController(IPontuacaoRepository repository, EstatisticaService estatisticaService)
         {
             _repository = repository;
+            _estatisticaService = estatisticaService;
         }
 
         [HttpPost]
@@ -24,35 +28,31 @@ namespace Arcade.Application.Controllers
         [HttpGet("ranking")]
         public IActionResult Ranking()
         {
-            var top10 = _repository.ObterTop10();
-            return Ok(top10);
-        }
+            var ranking = _repository.ObterTop10();
+            return Ok(ranking);
+        }        
 
-        [HttpGet("{jogador}")]
-        public IActionResult Estatisticas(string jogador)
+        [HttpGet("estatisticas/{jogador}")]
+        public ActionResult<EstatisticaJogadorDto> ObterEstatisticas(string jogador)
         {
-            var partidas = _repository.ObterPorJogador(jogador);
-            if (!partidas.Any()) return NotFound("Jogador não encontrado.");
+            jogador = Uri.UnescapeDataString(jogador);
 
-            var estatisticas = new
-            {
-                Jogador = jogador,
-                PartidasJogadas = partidas.Count,
-                MediaPontuacao = partidas.Average(p => p.Pontos),
-                MaiorPontuacao = partidas.Max(p => p.Pontos),
-                MenorPontuacao = partidas.Min(p => p.Pontos),
-                RecordesBatidos = CalcularRecordes(partidas),
-                TempoDeJogo = (partidas.Last().DataPartida - partidas.First().DataPartida).TotalDays + " dias"
-            };
+            var partidas = _repository.ObterPorJogador(jogador)
+                                      .OrderBy(p => p.DataPartida)
+                                      .ToList();
 
+            if (!partidas.Any())
+                return NotFound("Jogador não encontrado.");
+
+            var estatisticas = _estatisticaService.CalcularEstatisticas(jogador, partidas);
             return Ok(estatisticas);
         }
 
         [HttpPut("{id}")]
         public IActionResult AtualizarPontuacao(Guid id, [FromBody] Pontuacao pontuacao)
         {
-            var existe = _repository.ObterPorId(id);
-            if (existe == null)
+            var existente = _repository.ObterPorId(id);
+            if (existente == null)
                 return NotFound($"Pontuação com ID {id} não encontrada.");
 
             _repository.Atualizar(id, pontuacao);
@@ -62,26 +62,12 @@ namespace Arcade.Application.Controllers
         [HttpDelete("{id}")]
         public IActionResult RemoverPontuacao(Guid id)
         {
-            var existe = _repository.ObterPorId(id);
-            if (existe == null)
+            var existente = _repository.ObterPorId(id);
+            if (existente == null)
                 return NotFound($"Pontuação com ID {id} não encontrada.");
 
             _repository.Remover(id);
             return NoContent();
-        }
-
-        private int CalcularRecordes(List<Pontuacao> partidas)
-        {
-            int recordes = 0, max = 0;
-            foreach (var p in partidas)
-            {
-                if (p.Pontos > max)
-                {
-                    recordes++;
-                    max = p.Pontos;
-                }
-            }
-            return recordes - 1;
         }
     }
 }

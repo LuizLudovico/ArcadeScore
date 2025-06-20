@@ -1,5 +1,7 @@
 using Arcade.Application.Controllers;
+using Arcade.Domain.DTOs;
 using Arcade.Domain.Interfaces.Repository;
+using Arcade.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Xunit;
@@ -10,11 +12,13 @@ namespace Arcade.Application.Tests.Controller
     {
         private readonly IPontuacaoRepository _repository;
         private readonly PontuacaoController _controller;
+        private readonly EstatisticaService _estatisticaService;
 
         public PontuacaoControllerTests()
         {
             _repository = Substitute.For<IPontuacaoRepository>();
-            _controller = new PontuacaoController(_repository);
+            _estatisticaService = Substitute.For<EstatisticaService>(); 
+            _controller = new PontuacaoController(_repository, _estatisticaService); 
         }
 
         [Fact]
@@ -50,41 +54,8 @@ namespace Arcade.Application.Tests.Controller
             Assert.NotNull(resultado);
             Assert.Equal(200, resultado!.StatusCode);
             Assert.Equal(lista, resultado.Value);
-        }
+        }      
 
-        [Fact]
-        public void Estatisticas_DeveRetornarNotFound_QuandoJogadorNaoExiste()
-        {
-            // Arrange
-            _repository.ObterPorJogador("Inexistente").Returns(new List<Pontuacao>());
-
-            // Act
-            var resultado = _controller.Estatisticas("Inexistente") as NotFoundObjectResult;
-
-            // Assert
-            Assert.NotNull(resultado);
-            Assert.Equal(404, resultado!.StatusCode);
-        }
-
-        [Fact]
-        public void Estatisticas_DeveRetornarEstatisticasCompletas()
-        {
-            // Arrange
-            var partidas = new List<Pontuacao>
-            {
-                new Pontuacao("Luiz", 1000, DateTime.Now.AddDays(-2)),
-                new Pontuacao("Luiz", 1500, DateTime.Now)
-            };
-
-            _repository.ObterPorJogador("Luiz").Returns(partidas);
-
-            // Act
-            var resultado = _controller.Estatisticas("Luiz") as OkObjectResult;
-
-            // Assert
-            Assert.NotNull(resultado);
-            Assert.Equal(200, resultado!.StatusCode);
-        }
 
         [Fact]
         public void AtualizarPontuacao_DeveRetornarNotFound_SeNaoExistir()

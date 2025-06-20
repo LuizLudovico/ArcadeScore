@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Arcade.Service.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CrossCutting.DependencyInjection
 {
@@ -6,7 +7,7 @@ namespace CrossCutting.DependencyInjection
     {
         public static void ConfigureDependenciesService(IServiceCollection services)
         {
-            // Nenhum serviço adicional por enquanto
+            services.AddScoped<EstatisticaService>();
         }
     }
 }

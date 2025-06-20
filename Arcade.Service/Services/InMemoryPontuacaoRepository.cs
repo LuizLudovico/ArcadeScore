@@ -4,7 +4,16 @@ namespace Arcade.Service.Services
 {
     public class InMemoryPontuacaoRepository : IPontuacaoRepository
     {
-        private readonly List<Pontuacao> _pontuacoes = new();
+        private readonly List<Pontuacao> _pontuacoes;
+
+        public InMemoryPontuacaoRepository()
+        {
+            _pontuacoes = new List<Pontuacao>
+            {
+                new Pontuacao("Ludovico", 300, DateTime.UtcNow.AddDays(-1)),
+                new Pontuacao("Machado", 270, DateTime.UtcNow.AddDays(-2))
+            };
+        }
 
         public void Adicionar(Pontuacao pontuacao)
         {
