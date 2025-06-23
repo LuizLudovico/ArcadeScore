@@ -1,18 +1,18 @@
 
 # 🎮 ArcadeScore API
 
-Uma API RESTful em .NET 6 desenvolvida para registrar e analisar pontuações de jogadores em partidas de arcade. O objetivo do projeto é demonstrar uma estrutura limpa e escalável com boas práticas, como DDD, injeção de dependência e uso de repositório em memória.
+Uma API RESTful em .NET 6 desenvolvida para registrar e analisar pontuações de jogadores em partidas de arcade. O objetivo do projeto é demonstrar uma estrutura limpa e escalável com boas práticas, como DDD, injeção de dependência e repositório em memória.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-- ASP.NET Core 6 (Minimal Hosting Model)
+- ASP.NET Core 6
 - C# 10
-- Swagger/OpenAPI
-- Injeção de dependência (DI)
-- Arquitetura DDD em camadas
-- Repositório in-memory
+- Swagger / OpenAPI
+- Injeção de Dependência (DI)
+- Arquitetura em camadas (DDD)
+- Repositório In-Memory
 - RESTful API
 
 ---
@@ -22,36 +22,36 @@ Uma API RESTful em .NET 6 desenvolvida para registrar e analisar pontuações de
 ```
 ArcadeScore/
 ├── Application          # Web API + Controllers + Program.cs
-├── Domain               # Entidades e interfaces
-├── Service              # Implementação de repositórios e lógica
-├── CrossCutting         # Injeção de dependência centralizada
+├── Domain               # Entidades, DTOs e interfaces de repositório
+├── Service              # Serviços e repositórios concretos
+├── CrossCutting         # Configuração de injeção de dependência
 └── ArcadeScore.sln      # Solução principal
 ```
 
 ---
 
-## ✅ Funcionalidades da API
+## ✅ Endpoints da API
 
-| Verbo  | Endpoint                        | Descrição                                     |
-|--------|----------------------------------|-----------------------------------------------|
-| POST   | `/api/Pontuacao`                | Registra nova pontuação de jogador            |
-| GET    | `/api/Pontuacao/ranking`        | Lista os 10 jogadores com maior pontuação     |
-| GET    | `/api/Pontuacao/{jogador}`      | Estatísticas completas do jogador informado   |
-| PUT    | `/api/Pontuacao/{id}`           | Atualiza os dados de uma pontuação existente  |
-| DELETE | `/api/Pontuacao/{id}`           | Remove uma pontuação existente                |
+| Verbo  | Endpoint                                | Descrição                                      |
+|--------|-----------------------------------------|------------------------------------------------|
+| POST   | `/api/Pontuacao`                        | Registra nova pontuação                        |
+| GET    | `/api/Pontuacao/ranking`                | Retorna os 10 jogadores com maior pontuação    |
+| GET    | `/api/Pontuacao/estatisticas/{jogador}` | Retorna estatísticas completas do jogador      |
+| PUT    | `/api/Pontuacao/{id}`                   | Atualiza uma pontuação existente               |
+| DELETE | `/api/Pontuacao/{id}`                   | Remove uma pontuação                           |
 
 ---
 
 ## ▶️ Como Executar Localmente
 
-1. **Clone o repositório:**
+1. **Clone o repositório**
    ```bash
    git clone https://github.com/LuizLudovico/ArcadeScore.git
    ```
 
-2. **Abra a solução no Visual Studio 2022 ou superior**
+2. **Abra no Visual Studio 2022 ou superior**
 
-3. **Execute o projeto `Arcade.Application`**
+3. **Execute o projeto `Arcade.Application` (API)**
 
 4. **Acesse o Swagger:**
    ```
@@ -62,12 +62,8 @@ ArcadeScore/
 
 ## 🧪 Exemplos de Requisições
 
-### 📌 POST `/api/Pontuacao` — Registrar nova pontuação
-
-```http
-POST /api/Pontuacao
-Content-Type: application/json
-
+### 📌 POST `/api/Pontuacao`
+```json
 {
   "jogador": "Luiz",
   "pontos": 1500,
@@ -75,13 +71,7 @@ Content-Type: application/json
 }
 ```
 
-### 📌 GET `/api/Pontuacao/ranking` — Top 10 jogadores com maior pontuação
-
-```http
-GET /api/Pontuacao/ranking
-```
-
-**Resposta esperada:**
+### 📌 GET `/api/Pontuacao/ranking`
 ```json
 [
   {
@@ -93,13 +83,7 @@ GET /api/Pontuacao/ranking
 ]
 ```
 
-### 📌 GET `/api/Pontuacao/{jogador}` — Estatísticas de um jogador
-
-```http
-GET /api/Pontuacao/Luiz
-```
-
-**Resposta esperada:**
+### 📌 GET `/api/Pontuacao/estatisticas/Luiz`
 ```json
 {
   "jogador": "Luiz",
@@ -107,53 +91,36 @@ GET /api/Pontuacao/Luiz
   "mediaPontuacao": 1320,
   "maiorPontuacao": 1500,
   "menorPontuacao": 1200,
-  "recordesBatidos": 2,
-  "tempoDeJogo": "10 dias"
+  "vezesRecorde": 2,
+  "tempoQueJoga": "2 meses"
 }
 ```
 
-### 📌 PUT `/api/Pontuacao/{id}` — Atualizar uma pontuação existente
-
-```http
-PUT /api/Pontuacao/b3fd0b65-1c7e-47e2-810f-b2078372e927
-Content-Type: application/json
-
-{
-  "jogador": "Luiz",
-  "pontos": 1600,
-  "dataPartida": "2025-06-18T15:30:00"
-}
-```
-
-**Resposta esperada:**
+### 📌 PUT `/api/Pontuacao/{id}`
 ```json
 {
   "jogador": "Luiz",
   "pontos": 1600,
-  "dataPartida": "2025-06-18T15:30:00"
+  "dataPartida": "2025-06-20T14:00:00"
 }
 ```
 
-### 📌 DELETE `/api/Pontuacao/{id}` — Remover uma pontuação
+### 📌 DELETE `/api/Pontuacao/{id}`
 
-```http
-DELETE /api/Pontuacao/b3fd0b65-1c7e-47e2-810f-b2078372e927
-```
-
-**Resposta esperada:**
+Resposta:
 ```
 204 No Content
 ```
 
 ---
 
-## 🧠 O que foi considerado no desenvolvimento
+## 🧠 Considerações Técnicas
 
-- Separação de responsabilidades clara entre camadas
-- Boas práticas REST com HTTP Status apropriados
-- API testável e desacoplada usando DI
-- Repositório de dados simulado com lista em memória
-- Simples de entender, mas facilmente extensível
+- Organização em camadas respeitando o DDD
+- Uso de DI com baixo acoplamento
+- Lógica de estatísticas centralizada no serviço
+- Repositório de dados em memória simulado (InMemory)
+- Código limpo, comentado e preparado para extensão futura
 
 ---
 
@@ -164,4 +131,4 @@ Candidato à vaga .NET | GitHub: [@LuizLudovico](https://github.com/LuizLudovico
 
 ---
 
-> Projeto construído para fins de avaliação técnica — 2025 🚀
+> Projeto desenvolvido para avaliação técnica - 2025 🚀
