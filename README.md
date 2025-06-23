@@ -55,7 +55,7 @@ ArcadeScore/
 
 4. **Acesse o Swagger:**
    ```
-   https://localhost:{PORT}/swagger
+   http://localhost:5089/swagger/index.html
    ```
 
 ---

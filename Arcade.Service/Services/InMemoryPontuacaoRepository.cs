@@ -9,9 +9,24 @@ namespace Arcade.Service.Services
         public InMemoryPontuacaoRepository()
         {
             _pontuacoes = new List<Pontuacao>
-            {
-                new Pontuacao("Ludovico", 300, DateTime.UtcNow.AddDays(-1)),
-                new Pontuacao("Machado", 270, DateTime.UtcNow.AddDays(-2))
+            {                
+                new Pontuacao("Ludovico", 200, DateTime.UtcNow.AddDays(-5)),
+                new Pontuacao("Ludovico", 300, DateTime.UtcNow.AddDays(-3)),
+                new Pontuacao("Ludovico", 350, DateTime.UtcNow.AddDays(-1)),
+               
+                new Pontuacao("Machado", 270, DateTime.UtcNow.AddDays(-4)),
+                new Pontuacao("Machado", 270, DateTime.UtcNow.AddDays(-2)),
+                
+                new Pontuacao("Beatriz", 100, DateTime.UtcNow.AddDays(-10)),
+                new Pontuacao("Beatriz", 200, DateTime.UtcNow.AddDays(-8)),
+                new Pontuacao("Beatriz", 300, DateTime.UtcNow.AddDays(-6)),
+                new Pontuacao("Beatriz", 400, DateTime.UtcNow.AddDays(-2)),
+
+                
+                new Pontuacao("João", 320, DateTime.UtcNow.AddDays(-6)),
+               
+                new Pontuacao("Marina", 250, DateTime.UtcNow.AddDays(-7)),
+                new Pontuacao("Marina", 410, DateTime.UtcNow.AddDays(-2))
             };
         }
 
